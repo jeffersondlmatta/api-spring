@@ -1,0 +1,20 @@
+POST http://localhost:8080/cliente
+Content-Type: application/json
+
+{ "nome": "jeff", "email": "jeff@gmail.com"}
+
+
+###
+GET http://localhost:8080/cliente
+Content-Type: application/json
+
+
+###
+DELETE http://localhost:8080/cliente
+Content-Type: application/json
+
+
+
+
+
+

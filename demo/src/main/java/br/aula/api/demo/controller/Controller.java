@@ -1,10 +1,13 @@
 package br.aula.api.demo.controller;
 
 
+import br.aula.api.demo.modelo.Cliente;
 import br.aula.api.demo.modelo.Pessoa;
 import br.aula.api.demo.repository.Repositorio;
 import br.aula.api.demo.servico.Servico;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,19 +37,20 @@ public class Controller {
     }
 
     @GetMapping("/api/{codigo}")
-    public Pessoa selectBycode(@PathVariable int codigo){
-        return acao.findByCodigo(codigo);
+    public ResponseEntity<?> selectBycode(@PathVariable int codigo){
+        return servico.selecionarByCodigo(codigo);
     }
 
+
     @PutMapping("/api")
-    public Pessoa editar(@RequestBody Pessoa obj){
-        return acao.save(obj);
+    public ResponseEntity<?> editar(@RequestBody Pessoa obj){
+        return servico.editar(obj);
+
     }
 
     @DeleteMapping("/api/{codigo}")
-    public void remover(@PathVariable int codigo){
-        Pessoa obj = selectBycode(codigo);
-        acao.delete(obj);
+    public ResponseEntity<?> remover (@PathVariable int codigo){
+        return servico.excluir(codigo);
 
     }
 
@@ -78,6 +82,11 @@ public class Controller {
     @GetMapping("api/status")
     public ResponseEntity<?> status(){
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @PostMapping("/cliente")
+    public void cliente(@Valid @RequestBody Cliente obj){
+
     }
 
 
